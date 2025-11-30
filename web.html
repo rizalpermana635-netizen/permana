@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Bani</title>
+<link rel="icon" type="image/png" sizes="64x64" href="https://i.pinimg.com/736x/a7/00/aa/a700aac9f9f12e9f299750ebb3f68a43.jpg">
+<link rel="stylesheet" href="web.css">
+</head>
+<body>
+
+<div class="page-flip"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <a class="active" href="web.html">Web Design</a>
+    <a href="UI.html">UI Design</a>
+    <a href="payment.html">Payment</a>
+</nav>
+
+<!-- FORM CONTAINER -->
+<div class="container">
+    <h2>Make Website Custom</h2>
+
+    <form id="hireForm">
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" placeholder="Nama anda" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="youremail@gmail.com" required>
+        </div>
+
+        <!-- No Telpon Opsional -->
+        <div class="form-group">
+            <label for="telpon">No. Telpon (Opsional)</label>
+            <input type="tel" id="telpon" placeholder="Isi jika ada penawaran harga">
+        </div>
+
+        <div class="form-group">
+            <label for="jenis">Jenis Project</label>
+            <select id="jenis" required>
+                <option value="" selected disabled hidden>Pilih jenis project</option>
+                <option value="portfolio">Website Portfolio</option>
+                <option value="ecommerce">Website E-Commerce</option>
+                <option value="kampus">Website Kampus</option>
+                <option value="mobile">Mobile Aplikasi</option>
+                <option value="lainnya">Lainnya</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="otherProjectGroup">
+            <label for="otherProject">Isi Jenis Project</label>
+            <input type="text" id="otherProject" placeholder="Tuliskan jenis project" />
+        </div>
+
+        <div class="form-group">
+            <label for="deskripsi">Deskripsi Project</label>
+            <textarea id="deskripsi" placeholder="Deskripsi penting yang ingin ditambahkan" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" required>
+        </div>
+
+        <div class="form-group">
+            <label for="budget">Harga</label>
+            <input type="text" id="budget" placeholder="Tergantung jenis project" readonly>
+        </div>
+
+        <button type="submit" class="btn-submit">Kirim Project</button>
+    </form>
+</div>
+
+<!-- POPUP PESAN TERKIRIM -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="popup-close" id="popupClose">&times;</span>
+        <h3>Pesan Terkirim!</h3>
+        <p>Project akan segera di proses. Terima kasih.</p>
+    </div>
+</div>
+
+<!-- POPUP KONFIRMASI BUDGET -->
+<div class="popup" id="budgetPopup">
+    <div class="popup-content">
+        <span class="popup-close" id="budgetPopupClose">&times;</span>
+        <h3>Perhatian!</h3>
+        <p>Harga untuk jenis project ini bervariasi. Hubungi saya terlebih dahulu di halaman kontak!</p>
+        <button id="goToContact" class="btn-submit" style="margin-top:15px;">Ke Halaman Kontak</button>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("hireForm");
+const popup = document.getElementById("popup");
+const popupClose = document.getElementById("popupClose");
+
+const selectJenis = document.getElementById("jenis");
+const otherGroup = document.getElementById("otherProjectGroup");
+const otherInput = document.getElementById("otherProject");
+const budgetInput = document.getElementById("budget");
+
+const budgetPopup = document.getElementById("budgetPopup");
+const budgetPopupClose = document.getElementById("budgetPopupClose");
+const goToContact = document.getElementById("goToContact");
+
+// Harga default tiap project
+const budgetList = {
+    portfolio: "Rp 3.000.000",
+    ecommerce: "Rp 5.000.000",
+    kampus: "Rp 10.000.000",
+    mobile: "Rp 4.500.000"
+};
+
+// Tampilkan input tambahan jika pilih "Lainnya"
+selectJenis.addEventListener("change", function() {
+    if(this.value === "lainnya"){
+        otherGroup.style.display = "block";
+        otherInput.required = true;
+        budgetInput.value = "";
+    } else {
+        otherGroup.style.display = "none";
+        otherInput.required = false;
+        otherInput.value = "";
+        budgetInput.value = budgetList[this.value] || "";
+    }
+});
+
+// Tampilkan popup budget saat fokus
+budgetInput.addEventListener("focus", function() {
+    if(selectJenis.value === "" || (selectJenis.value === "lainnya" && otherInput.value.trim() === "")){
+        alert("Silakan pilih jenis project terlebih dahulu!");
+        budgetInput.blur();
+        return;
+    }
+    budgetPopup.classList.add("show");
+    budgetInput.blur();
+});
+
+// Tutup popup budget
+budgetPopupClose.addEventListener("click", function() {
+    budgetPopup.classList.remove("show");
+});
+
+goToContact.addEventListener("click", function() {
+    window.location.href = "contact.html";
+});
+
+// Form submit
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let jenisValue = selectJenis.value;
+    if(jenisValue === ""){
+        alert("Silakan pilih jenis project!");
+        return;
+    }
+    if(jenisValue === "lainnya"){
+        if(otherInput.value.trim() === ""){
+            alert("Silakan isi jenis project lainnya!");
+            return;
+        }
+        jenisValue = otherInput.value.trim();
+    }
+    popup.classList.add("show");
+    form.reset();
+    otherGroup.style.display = "none";
+    otherInput.required = false;
+    budgetInput.value = "";
+});
+
+// Tutup popup pesan terkirim
+popupClose.addEventListener("click", function () {
+    popup.classList.remove("show");
+});
+window.addEventListener("click", function(e) {
+    if(e.target === popup || e.target === budgetPopup){
+        popup.classList.remove("show");
+        budgetPopup.classList.remove("show");
+    }
+});
+
+// PAGE TRANSITION
+const flip = document.querySelector('.page-flip');
+const links = document.querySelectorAll('a');
+links.forEach(link => {
+    if(link.target === "_blank") return;
+    link.addEventListener('click', function(e){
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        flip.classList.add('active');
+        setTimeout(() => window.location.href = href, 800);
+    });
+});
+window.addEventListener('DOMContentLoaded', () => flip.classList.remove('active'));
+
+</script>
+</body>
+</html>

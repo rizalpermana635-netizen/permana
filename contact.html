@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Bani</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="https://i.pinimg.com/736x/a7/00/aa/a700aac9f9f12e9f299750ebb3f68a43.jpg">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+<!-- PAGE FLIP OVERLAY -->
+<div class="page-flip"></div>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a class="active" href="contact.html">Contact</a>
+        <a href="web.html">Web Design</a>
+        <a href="UI.html">UI Design</a>
+        <a href="payment.html">Payment</a>
+    </nav>
+
+<section class="contact-section">
+    <h1 class="title">Complaint & Contact</h1>
+
+    <!-- FORM -->
+    <form class="contact-form" id="contactForm">
+        <input type="text" id="nama" placeholder="Nama" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <textarea id="pesan" placeholder="Pesan" required></textarea>
+        <button type="submit">Kirim</button>
+    </form>
+
+    <!-- ICON GRID -->
+    <div class="contact-grid">
+        <a class="contact-box" href="https://www.instagram.com/mpermana__" target="_blank">
+            <img src="logo_ig.png">
+            <p>Instagram</p>
+        </a>
+
+        <a class="contact-box" href="mailto:rizalpermana635@gmail.com" target="_blank">
+            <img src="logo_email.png">
+            <p>Email</p>
+        </a>
+
+        <a class="contact-box" href="https://wa.me/6285136297220?text=Happy a great day%20" target="_blank">
+            <img src="WA.png">
+            <p>WhatsApp</p>
+        </a>
+        <a class="contact-box" href="https://maps.app.goo.gl/rUWznMXCJLgF1RD26" target="_blank">
+            <img src="logo_lokasi.png">
+            <p>Alamat</p>
+        </a>
+    </div>
+</section>
+
+<!-- MODAL POPUP -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <img src="centang_hijau-removebg-preview.png" alt="Success">
+        <p id="modalMessage"></p>
+        <button id="closeModal">OK</button>
+    </div>
+</div>
+
+<script>
+    // FORM HANDLER
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value;
+
+        // SHOW MODAL
+        const modal = document.getElementById("modal");
+        const modalMessage = document.getElementById("modalMessage");
+        modalMessage.textContent = "Pesan berhasil dikirim! Masukan anda sangat berguna untuk perkembangan saya. Jika ingin lebih lanjut silahkan pilih pada bagian ikon contact dibawah. Terima kasih, " + nama + " 😊😊";
+        modal.classList.add("active");
+
+        // RESET FORM
+        document.getElementById("nama").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("pesan").value = "";
+    });
+
+    // CLOSE MODAL
+    document.getElementById("closeModal").addEventListener("click", () => {
+        const modal = document.getElementById("modal");
+        modal.classList.remove("active");
+    });
+
+    // Klik di luar modal-content untuk menutup
+    document.getElementById("modal").addEventListener("click", (e) => {
+        if(e.target === e.currentTarget){
+            e.currentTarget.classList.remove("active");
+        }
+    });
+
+    // =====================
+    // PAGE FLIP TRANSITION
+    // =====================
+    const flip = document.querySelector('.page-flip');
+    const links = document.querySelectorAll('a');
+
+    links.forEach(link => {
+        if(link.target === "_blank") return;
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            const href = this.getAttribute('href');
+
+            flip.classList.add('active');
+            setTimeout(() => {
+                window.location.href = href;
+            }, 800);
+        });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        flip.classList.remove('active');
+    });
+</script>
+
+</body>
+</html>

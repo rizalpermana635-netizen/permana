@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Bani</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="https://i.pinimg.com/736x/a7/00/aa/a700aac9f9f12e9f299750ebb3f68a43.jpg">
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+
+<div class="page-flip"></div>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a class="active" href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="web.html">Web Design</a>
+        <a href="UI.html">UI Design</a>
+        <a href="payment.html">Payment</a>
+    </nav>
+
+<section class="about-section">
+    <h1 class="title">About Me</h1>
+    <div class="about-container">
+        <div class="photo-card">
+            <img src="foto 2.jpg" alt="Foto">
+        </div>
+        <p class="about-description">
+            Halo, saya seorang Frontend Developer & UI Designer.  
+            Saya senang membuat desain yang modern, interaktif, dan responsif.
+        </p>
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Address</h3>
+                <p>Soreang, Kab Bandung Indonesia</p>
+            </div>
+            <div class="info-box">
+                <h3>Education</h3>
+                <p>Universitas Muhammadiyah Bandung</p>
+            </div>
+            <div class="info-box">
+                <h3>Status</h3>
+                <p>Mahasiswa</p>
+            </div>
+            <div class="info-box">
+                <h3>Hobby</h3>
+                <p>Game & Sepak bola</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // animasi muncul internal halaman
+    window.addEventListener('DOMContentLoaded', () => {
+        const photo = document.querySelector('.photo-card');
+        const desc = document.querySelector('.about-description');
+        const infoBoxes = document.querySelectorAll('.info-box');
+
+        setTimeout(() => photo.classList.add('visible'), 100);
+        setTimeout(() => desc.classList.add('visible'), 400);
+        infoBoxes.forEach((box, i) => setTimeout(() => box.classList.add('visible'), 600 + i*200));
+    });
+
+    // page transition
+    const flip = document.querySelector('.page-flip');
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        if(link.target === "_blank") return;
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            flip.classList.add('active');
+            setTimeout(() => window.location.href = href, 800);
+        });
+    });
+    window.addEventListener('DOMContentLoaded', () => flip.classList.remove('active'));
+</script>
+
+</body>
+</html>

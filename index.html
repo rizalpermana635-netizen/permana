@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Bani</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="https://i.pinimg.com/736x/a7/00/aa/a700aac9f9f12e9f299750ebb3f68a43.jpg">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <!-- POPUP HIRE ME -->
+<!-- POPUP HIRE ME -->
+<div class="hire-popup" id="hirePopup">
+    <div class="hire-popup-content">
+
+        <span class="close-popup" id="closePopup">&times;</span>
+
+        <h3>Pilih Halaman</h3>
+
+        <button class="popup-btn" onclick="window.location.href='web.html'">
+            Web Design
+        </button>
+
+        <button class="popup-btn" onclick="window.location.href='UI.html'">
+            UI Design
+        </button>
+
+    </div>
+</div>
+
+
+
+    <!-- Overlay page transition -->
+    <div class="page-flip"></div>
+
+    <nav class="navbar">
+        <a class="active" href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="web.html">Web Design</a>
+        <a href="UI.html">UI Design</a>
+        <a href="payment.html">Payment</a>
+    </nav>
+
+    <section class="home-section">
+        <h3 class="main-name" id="animatedName">Hallo, I'm Muhammad Bani Rizal Muttaqin Permana</h3>
+        <p class="subtitle">Frontend Developer & UI Designer</p>
+
+        <div class="home-buttons">
+            <a href="cv.pdf" class="btn download" target="_blank">Download CV</a>
+            <a href="#" class="btn hire">Hire Me</a>
+        </div>
+    </section>
+
+<script>
+/* Split the heading into per-letter spans and stagger entrance;
+   then enable continuous floating + gradient (infinite). */
+function splitAnimatedName() {
+    const el = document.getElementById('animatedName');
+    if (!el) return;
+    const text = el.textContent || '';
+    el.setAttribute('aria-label', text.trim());
+    el.innerHTML = '';
+    [...text].forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'char' + (ch === ' ' ? ' space' : '');
+        span.style.setProperty('--i', i);
+        span.textContent = ch;
+        el.appendChild(span);
+    });
+    // after entrance animation finishes, enable gentle continuous float
+    const entranceDuration = (text.length * 50) + 900;
+    setTimeout(() => el.classList.add('floating'), entranceDuration);
+}
+window.addEventListener('DOMContentLoaded', () => {
+    // prepare animated name (per-letter)
+    splitAnimatedName();
+    // Page transition (keep existing behaviour)
+    const flip = document.querySelector('.page-flip');
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        // keep external/new-tab links immediately
+        if (link.target === "_blank") return;
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            // if no href or it's the current page, do normal behaviour
+            if (!href || href === window.location.pathname || href.startsWith('#')) return;
+            e.preventDefault();
+            if (flip) flip.classList.add('active');
+            setTimeout(() => window.location.href = href, 800);
+        });
+    });
+    // ensure flip overlay hidden when page loads
+    if (flip) flip.classList.remove('active');
+});
+// ===== POPUP HIRE ME =====
+const hireBtn = document.querySelector(".btn.hire");
+const hirePopup = document.getElementById("hirePopup");
+const closePopup = document.getElementById("closePopup");
+
+hireBtn.addEventListener("click", function(e) {
+    e.preventDefault(); // cegah pindah halaman
+    hirePopup.classList.add("show");
+});
+
+closePopup.addEventListener("click", () => {
+    hirePopup.classList.remove("show");
+});
+
+hirePopup.addEventListener("click", (e) => {
+    if (e.target === hirePopup) hirePopup.classList.remove("show");
+});
+
+</script>
+</body>
+</html>

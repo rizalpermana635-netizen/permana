@@ -1,0 +1,114 @@
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Muhammad Bani</title>
+        <link rel="icon" type="image/png" sizes="64x64" href="https://i.pinimg.com/736x/a7/00/aa/a700aac9f9f12e9f299750ebb3f68a43.jpg">
+        <link rel="stylesheet" href="projects.css">
+    </head>
+    <body>
+
+    <div class="page-flip"></div>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="web.html">Web Design</a>
+        <a href="UI.html">UI Design</a>
+        <a href="payment.html">Payment</a>
+    </nav>
+
+    <section class="projects-section">
+        <h1 class="title">Projects</h1>
+        <div class="project-grid-top">
+
+            <div class="project-card" tabindex="0">
+                <h3>Website E-Commerce</h3>
+                <div class="project-content">
+                    <img src="asetnegara cut.jpg" alt="Website Portfolio">
+                    <p><i>Desain Website jual beli produk.</i></p>
+                </div>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <h3>Poster Pizza</h3>
+                <div class="project-content">
+                    <img src="Pizza poster.png" alt="UI Mobile App">
+                    <p><i>Desain Poster penjualan Pizza.</i></p>
+                </div>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <h3>Poster Komfesif</h3>
+                <div class="project-content">
+                    <img src="Komfesif 2026.png" alt="Landing Page">
+                    <p><i>Desain Poster Kompetisi Festival Informatika.</i></p>
+                </div>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <h3>Poster Komfesif</h3>
+                <div class="project-content">
+                    <img src="Komfesif 2026.png" alt="Project 4">
+                    <p><i>Desain Poster Kompetisi Festival Informatika.</i></p>
+                </div>
+            </div>
+        </div>
+        <div class="project-grid-bottom">      
+            <div class="project-card" tabindex="0">
+                <h3>Poster Pizza</h3>
+                <div class="project-content">
+                    <img src="Pizza poster.png" alt="Project 5">
+                    <p><i>Desain Poster penjualan Pizza.</i></p>
+                </div>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <h3>Website E-Commerce</h3>
+                <div class="project-content">
+                    <img src="asetnegara cut.jpg" alt="Project 6">
+                    <p><i>Desain Website jual beli produk.</i></p>
+                </div>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <h3>Poster Pizza</h3>
+                <div class="project-content">
+                    <img src="Pizza poster.png" alt="Project 7">
+                    <p><i>Desain Poster penjualan Pizza.</i></p>
+                </div>
+            </div>
+
+            <div class="project-card" tabindex="0">
+                <h3>Poster Komfesif</h3>
+                <div class="project-content">
+                    <img src="Komfesif 2026.png" alt="Project 8">
+                    <p><i>Desain Poster Kompetisi Festival Informatika.</i></p>
+                </div>
+                </div> 
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // page transition
+        const flip = document.querySelector('.page-flip');
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            if(link.target === "_blank") return;
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                flip.classList.add('active');
+                setTimeout(() => window.location.href = href, 800);
+            });
+        });
+        window.addEventListener('DOMContentLoaded', () => flip.classList.remove('active'));
+    </script>
+
+    </body>
+    </html>

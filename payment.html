@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Bani</title>
+    <link rel="stylesheet" href="payment.css">
+    <link rel="icon" type="image/png" sizes="64x64" href="https://i.pinimg.com/736x/a7/00/aa/a700aac9f9f12e9f299750ebb3f68a43.jpg">
+</head>
+<body>
+
+<!-- PAGE FLIP OVERLAY -->
+<div class="page-flip"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <a href="web.html">Web Design</a>
+    <a href="UI.html">UI Design</a>
+    <a class="active" href="payment.html">Payment</a>
+</nav>
+
+<!-- FORM TITLE -->
+<section class="payment-title">
+    <h1>Payment</h1>
+</section>
+
+<!-- PAYMENT FORM SECTION -->
+<section class="payment-section">
+    <form id="paymentForm" class="payment-form">
+
+        <div class="form-group">
+            <label for="fullName">Nama</label>
+            <input type="text" id="fullName" placeholder="Nama Anda" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telpon">No. Telpon (Opsional)</label>
+            <input type="tel" id="telpon" placeholder="No telpon anda">
+        </div>
+
+        <div class="form-group">
+            <label for="projectType">Jenis Project Anda</label>
+            <select id="projectType" required>
+                <option value="" selected disabled hidden>Pilih jenis project</option>
+                <option value="portfolio">Portfolio</option>
+                <option value="ecommerce">E-Commerce</option>
+                <option value="kampus">Kampus</option>
+                <option value="mobile">Mobile App</option>
+                <option value="thumbnail">Thumbnail YouTube</option>
+                <option value="poster">Poster</option>
+                <option value="banner">Banner</option>
+                <option value="logo">Logo</option>
+                <option value="lainnya">Lainnya</option>
+            </select>
+        </div>
+
+        <!-- FORM KHUSUS PROJECT "LAINNYA" -->
+        <div id="otherProjectForm" class="form-group hidden">
+            <label for="otherDescription">Jenis Project Lainnya</label>
+            <textarea id="otherDescription" placeholder="Jenis project Anda..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="paymentMethod">Metode Pembayaran</label>
+            <select id="paymentMethod" required>
+                <option value="" selected disabled hidden>Pilih metode pembayaran</option>
+                <option value="bank">Transfer Bank</option>
+                <option value="gopay">GoPay</option>
+                <option value="ovo">OVO</option>
+                <option value="dana">Dana</option>
+                <option value="shopeepay">ShopeePay</option>
+            </select>
+        </div>
+
+        <!-- Form Bank -->
+        <div id="bankForm" class="form-group hidden">
+            <label for="bankName">Bank</label>
+            <select id="bankName">
+                <option value="" selected disabled hidden>Pilih Bank</option>
+                <option value="bca">BCA</option>
+                <option value="mandiri">Mandiri</option>
+                <option value="bni">BNI</option>
+                <option value="bri">BRI</option>
+                <option value="seabank">Seabank</option>
+            </select>
+
+            <label for="bankAccount">No. Rekening</label>
+            <input type="text" id="bankAccount" placeholder="12345678">
+        </div>
+
+        <div class="form-group">
+            <label for="totalAmount">Total Bayar</label>
+            <input type="text" id="totalAmount" placeholder="Rp 0" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Bayar Sekarang</button>
+    </form>
+</section>
+
+<!-- POPUP KONFIRMASI -->
+<div class="popup" id="confirmationPopup">
+    <div class="popup-content">
+        <span class="popup-close" id="popupClose">&times;</span>
+        <h3>Pembayaran Berhasil!</h3>
+        <p>Terima kasih, pembayaran Anda telah kami terima.</p>
+    </div>
+</div>
+
+<script>
+    // ===== PAGE TRANSITION =====
+    const flip = document.querySelector('.page-flip');
+    window.addEventListener('DOMContentLoaded', () => flip.classList.remove('active'));
+    document.querySelectorAll('a').forEach(link => {
+        if(link.target === "_blank") return;
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+            if(!href || href.startsWith('#') || href === window.location.pathname) return;
+            e.preventDefault();
+            flip.classList.add('active');
+            setTimeout(() => window.location.href = href, 800);
+        });
+    });
+
+    // ===== FORM BANK =====
+    const paymentMethod = document.getElementById("paymentMethod");
+    const bankForm = document.getElementById("bankForm");
+
+    paymentMethod.addEventListener("change", () => {
+        if(paymentMethod.value === "bank") {
+            bankForm.classList.remove("hidden");
+            bankForm.querySelectorAll("input, select").forEach(el => el.required = true);
+        } else {
+            bankForm.classList.add("hidden");
+            bankForm.querySelectorAll("input, select").forEach(el => el.required = false);
+        }
+    });
+
+    // ===== TOTAL BAYAR & FORM LAINNYA =====
+    const projectTypeInput = document.getElementById("projectType");
+    const otherProjectForm = document.getElementById("otherProjectForm");
+    const totalAmountInput = document.getElementById("totalAmount");
+
+    const projectPrices = {
+        portfolio: 3000000,
+        ecommerce: 5000000,
+        kampus: 10000000,
+        mobile: 4500000,
+        thumbnail: 150000,
+        poster: 100000,
+        banner: 200000,
+        logo: 100000
+    };
+
+    projectTypeInput.addEventListener("change", () => {
+        if(projectTypeInput.value === "lainnya"){
+            otherProjectForm.classList.remove("hidden"); // muncul
+            totalAmountInput.readOnly = false; // bisa diketik manual
+            totalAmountInput.value = "";
+            totalAmountInput.placeholder = "Masukkan total bayar";
+        } else {
+            otherProjectForm.classList.add("hidden"); // sembunyi
+            totalAmountInput.readOnly = false; // tetap bisa diketik manual
+            totalAmountInput.value = "";
+            totalAmountInput.placeholder = "Rp 0";
+
+            // Otomatis isi total jika harga ada
+            const price = projectPrices[projectTypeInput.value];
+            if(price !== undefined){
+                totalAmountInput.value = `Rp ${price.toLocaleString()}`;
+            }
+        }
+    });
+
+    // ===== FORM SUBMIT =====
+    const paymentForm = document.getElementById("paymentForm");
+    const confirmationPopup = document.getElementById("confirmationPopup");
+    const popupClose = document.getElementById("popupClose");
+
+    paymentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        confirmationPopup.classList.add("show");
+        paymentForm.reset();
+        bankForm.classList.add("hidden");
+        otherProjectForm.classList.add("hidden");
+        totalAmountInput.value = "";
+        totalAmountInput.readOnly = false;
+        totalAmountInput.placeholder = "Rp 0";
+    });
+
+    popupClose.addEventListener("click", () => confirmationPopup.classList.remove("show"));
+    confirmationPopup.addEventListener("click", (e) => {
+        if(e.target === confirmationPopup) confirmationPopup.classList.remove("show");
+    });
+</script>
+
+</body>
+</html>

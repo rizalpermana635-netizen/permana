@@ -1,0 +1,154 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #06060f;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* PAGE ANIMATION */
+.page-container {
+    animation: fadeIn 0.3s ease-out;
+    padding-bottom: 50px;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.35s ease-out;
+}
+
+.slide-out-left {
+    animation: slideOutLeft 0.35s ease-in forwards;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-120px); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex; justify-content: center; gap: 40px; padding: 25px;
+    background: rgba(255,255,255,0.05);
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+}
+.navbar a {
+    color: var(--text); text-decoration: none; transition: color 0.3s ease;
+}
+.navbar a:hover, .navbar .active { color: var(--hover); }
+
+/* TOMBOL KIRIM (SAMA DENGAN HALAMAN SEBELUMNYA) */
+.btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 18px;
+    background: #4ef3ff;
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.85;
+}
+
+
+/* FORM CONTAINER */
+.form-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-align: center;
+}
+
+label {
+    font-size: 14px;
+    margin-top: 12px;
+    display: block;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #1a1a2b;
+    color: #fff;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 18px;
+    background: #4cf3ff;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.7;
+}
+
+/* Input Lainnya Hidden */
+.hidden { display: none; }
+
+.hidden-text {
+    color: transparent !important;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.prev-btn {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.prev-btn:hover {
+    opacity: 1;
+}

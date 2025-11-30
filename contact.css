@@ -1,0 +1,217 @@
+:root {
+    --bg: #05050f;
+    --text: #fff;
+    --glow: #40e5ff;
+    --font-main: "Poppins", sans-serif;
+    --title-size: 45px;
+    --title-top: 70px;
+    --title-size: 45px;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+/* BODY */
+body {
+    background: radial-gradient(circle at top, #121426, #000);
+    color: var(--text);
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 25px;
+    background: rgba(255,255,255,0.05);
+}
+
+.navbar a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.navbar .active,
+.navbar a:hover {
+    color: var(--glow);
+}
+
+/* CONTACT SECTION */
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Judul tetap di atas */
+.title {
+    position: relative;      /* supaya top berfungsi */
+    top: var(--title-top);   /* posisi vertikal judul */
+    font-size: var(--title-size);
+    text-shadow: 0 0 18px var(--glow);
+}
+
+
+/* FORM */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    width: 100%;
+    margin: 150px auto 0 auto; /* atur posisi form secara terpisah */
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-family: var(--font-main);
+    font-size: 16px;
+}
+
+.contact-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+.contact-form button {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: var(--glow);
+    color: #05050f;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--glow);
+}
+
+/* STATUS PESAN */
+#status {
+    margin-top: 10px;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+/* CONTACT GRID (IKON) */
+.contact-grid {
+    margin-top: 60px; /* jarak ikon dari form, bisa diubah sendiri */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-box {
+    width: 140px;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 18px;
+    text-decoration: none;
+    color: var(--text);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.contact-box:hover {
+    box-shadow: 0 0 20px var(--glow);
+    transform: translateY(-8px);
+}
+
+.contact-box img {
+    width: 40px;
+}
+
+/* ==========================
+   PAGE FLIP TRANSITION
+=========================== */
+.page-flip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+}
+
+/* Saat aktif, geser ke kiri (menutupi halaman) */
+.page-flip.active {
+    transform: translateX(0);
+}
+
+/* MODAL POPUP CENTER */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.modal-content img {
+    width: 50px;
+    height: 50px;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    border: 2px solid var(--glow); /* garis luar */
+    border-radius: 8px;
+    background: transparent; /* default transparan */
+    color: var(--glow);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.modal-content button:hover {
+    background: var(--glow);
+    color: #000; /* teks kontras dengan background neon */
+    box-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow), 0 0 40px var(--glow);
+    transform: scale(1.05); /* efek sedikit membesar */
+}
+

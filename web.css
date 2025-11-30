@@ -1,0 +1,89 @@
+:root {
+    --bg: #05050f;
+    --text: #fff;
+    --hover: #4ef3ff;
+    --font-main: "Poppins", sans-serif;
+}
+
+* {
+    margin:0; padding:0; box-sizing:border-box; font-family: var(--font-main);
+}
+
+body {
+  background: radial-gradient( #111427 0%, #000 0%, #111427 90%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex; justify-content: center; gap: 40px; padding: 25px;
+    background: rgba(255,255,255,0.05);
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+}
+.navbar a {
+    color: var(--text); text-decoration: none; transition: color 0.3s ease;
+}
+.navbar a:hover, .navbar .active { color: var(--hover); }
+
+/* CONTAINER */
+.container {
+    width: 100%;
+    max-width: 600px;
+    height: calc(100vh - 80px); /* sesuaikan dengan margin-top baru */
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    margin: 80px auto 40px;
+    overflow-y: auto;
+}
+
+
+.container::-webkit-scrollbar { width:8px; }
+.container::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius:8px; }
+.container::-webkit-scrollbar-thumb { background: rgba(78,243,255,0.3); border-radius:8px; }
+
+/* FORM */
+h2 { text-align:center; margin-bottom:25px; font-size:30px; }
+.form-group { margin-bottom:18px; }
+label { display:block; font-size:15px; opacity:0.8; margin-bottom:6px; }
+input, textarea, select {
+    width:100%; padding:12px; border-radius:12px; border:2px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05); color:#fff; outline:none; transition:0.3s ease;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--hover); }
+textarea { height:140px; resize:none; }
+
+.btn-submit {
+    width:100%; padding:14px; margin-top:10px;
+    background:transparent; color: var(--hover); border:2px solid var(--hover);
+    border-radius:14px; font-weight:bold; font-size:16px; cursor:pointer; transition:0.3s ease;
+}
+.btn-submit:hover { background:var(--hover); color:#000; transform:scale(1.05); }
+
+/* POPUP */
+.popup {
+    position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6);
+    display:none; justify-content:center; align-items:center; z-index:999;
+}
+.popup.show { display:flex; }
+.popup-content { position:relative; background: var(--bg); padding:30px; border-radius:20px; text-align:center; width:90%; max-width:400px;}
+.popup-close { position:absolute; top:15px; right:20px; font-size:25px; cursor:pointer; color:var(--hover); }
+
+/* SELECT */
+select { background: rgba(0,0,0,0.7); color:#fff; }
+
+/* INPUT LAINNYA */
+#otherProjectGroup { margin-top:12px; display:none; }
+#otherProjectGroup input { width:100%; padding:12px; border-radius:12px; border:2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color:#fff; outline:none; transition:0.3s ease; }
+#otherProjectGroup input:focus { border-color: var(--hover); }
+
+/* PAGE TRANSITION */
+.page-flip {
+    position:fixed; top:0; left:0; width:100%; height:100%; background: var(--bg); z-index:2000;
+    transform: translateX(100%); transition: transform 0.8s ease; pointer-events: none;
+}
+.page-flip.active { transform: translateX(0); }

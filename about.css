@@ -1,0 +1,176 @@
+:root {
+    --bg: #05050f;
+    --text: #fff;
+    --glow: #3be8ff;
+    --font-main: "Poppins", sans-serif;
+    --title-size: 45px;
+    --subtitle-size: 18px;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+body {
+    background: radial-gradient(circle at top, #111426, #000);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* ===================== NAVBAR ===================== */
+.navbar {
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(8px);
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.3s;
+}
+
+.navbar a:hover,
+.navbar .active {
+    color: var(--glow);
+    text-shadow: 0 0 12px var(--glow);
+}
+
+/* ===================== ABOUT SECTION ===================== */
+.about-section {
+    min-height: 90vh;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* TITLE */
+.title {
+    font-size: var(--title-size);
+    margin-bottom: 50px;
+    text-shadow: 0 0 18px var(--glow);
+}
+
+/* ABOUT CONTAINER */
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* FOTO BULAT */
+.photo-card {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--glow);
+    box-shadow: 0 0 25px var(--glow);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.photo-card.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* DESKRIPSI */
+.about-description {
+    font-size: var(--subtitle-size);
+    line-height: 1.8;
+    max-width: 700px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.about-description.visible {
+    opacity: 0.8;
+    transform: translateY(0);
+}
+
+/* INFO GRID */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+.info-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 12px rgba(59,232,255,0.2);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.info-box.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.info-box h3 {
+    margin-bottom: 10px;
+    color: var(--glow);
+    text-shadow: 0 0 12px var(--glow);
+}
+
+.info-box p {
+    opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .photo-card {
+        width: 140px;
+        height: 140px;
+    }
+
+    .about-container {
+        gap: 30px;
+    }
+}
+/* ==========================
+   PAGE FLIP TRANSITION
+=========================== */
+.page-flip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+}
+
+/* Saat aktif, geser ke kiri (menutupi halaman) */
+.page-flip.active {
+    transform: translateX(0);
+}
